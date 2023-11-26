@@ -6,12 +6,15 @@ from aiogram.filters.command import Command
 
 from loader import dp, bot, bot_db, db_users
 import handlers
+from handlers.users.dynamic_test import init_questions
 
 @dp.startup()
 async def on_startup(dispatcher):
     bot_db.open()
     db_users.connect(bot_db)
     db_users.create_default_tables()
+
+    init_questions()
     logging.info("Bot has runned")
 
 @dp.shutdown()
